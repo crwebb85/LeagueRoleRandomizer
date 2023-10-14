@@ -23,13 +23,24 @@ async def on_message(message):
         return
 
     if message.content.startswith("$reroll"):
-        rolls = ["top", "jungle", "mid", "bot", "support"]
+        roles = ["top", "jungle", "mid", "bot", "support"]
         people = message.content.removeprefix("$reroll").split()
         random_people = [f"rando{index}" for index in range(1, 6)]
         people.extend(random_people)
         people = people[0:5]
         random.shuffle(people)
-        lines = [f"{roll}: {person}" for roll, person in zip(rolls, people)]
+        lines = [f"{role}: {person}" for role, person in zip(roles, people)]
+        out = "\n".join(lines)
+        await message.channel.send(out)
+
+    elif message.content.startswith("$aram"):
+        roles = ["mid", "mid", "mid", "mid", "mid"]
+        people = message.content.removeprefix("$aram").split()
+        random_people = [f"rando{index}" for index in range(1, 6)]
+        people.extend(random_people)
+        people = people[0:5]
+        random.shuffle(people)
+        lines = [f"{role}: {person}" for role, person in zip(roles, people)]
         out = "\n".join(lines)
         await message.channel.send(out)
 
